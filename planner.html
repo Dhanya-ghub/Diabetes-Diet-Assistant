@@ -1,0 +1,37 @@
+<div class="planner-grid">
+  <div class="section" id="language-section">
+    <h2 data-key="language">Choose Your Language:</h2>
+    <select id="language" onchange="translatePage()">
+      <option value="en">English</option>
+      <option value="ta">தமிழ்</option>
+      <option value="te">తెలుగు</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="ml">മലയാളം</option>
+    </select>
+  </div>
+
+  <div class="section" id="meal-section">
+    <h2 data-key="selectMeals">Select Your Meals:</h2>
+    <select id="meal"></select>
+    <button onclick="addMeal()" data-key="addMeal">Add Meal</button>
+    <ul id="mealList"></ul>
+  </div>
+
+  <div class="section" id="nutrition-section">
+    <h3 data-key="nutritionSummary">Nutrition Summary</h3>
+    <div id="summary"></div>
+  </div>
+
+  <div class="section" id="sugar-section">
+    <h3 data-key="enterSugar">Enter Blood Sugar (mg/dL)</h3>
+    <input type="number" id="sugar" />
+    <p data-key="normalRange">Normal Range: 70–130 mg/dL (fasting)</p>
+    <button onclick="logSugar()" data-key="log">Log</button>
+    <div id="sugarLog"></div>
+  </div>
+
+  <div class="section" id="gi-section">
+    <h3 data-key="giReport">📊 Daily GI Report</h3>
+    <div id="giReport"></div>
+  </div>
+</div>

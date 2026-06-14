@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>South Indian Diabetes Diet Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #165c34;
+      --accent: #d39b6e;
+      --bg: #f0f8ff;
+      --text: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .language-selector {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    select {
+      padding: 0.3rem;
+      font-size: 1rem;
+    }
+
+    .landing {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .landing h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .start-btn {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .main-content {
+      display: none;
+      padding: 2rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      background-color: var(--accent);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .tab-content {
+      display: none;
+      background-color: white;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .active {
+      display: block;
+    }
+
+    .report-column {
+      float: right;
+      width: 30%;
+      background-color: #e6f7ff;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-left: 2rem;
+    }
+    .meal-choice {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+}
+
+.meal-choice input {
+  margin-right: 0.5rem;
+}
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--primary);
+      color: white;
+      margin-top: 2rem;
+    }
+.meal-choice.selected {
+  background-color: #e76f51;
+}
+.meal-btn {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.meal-btn.selected {
+  background-color: #e76f51;
+}
+.food-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.food-card.selected {
+  border: 2px solid var(--accent);
+  background-color: #fff8f0;
+}
+
+.select-btn {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.intro-text {
+  max-width: 600px;
+  font-size: 1.1rem;
+  margin: 1rem auto;
+  text-align: center;
+}
+#tips-list {
+  padding-left: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.benefits {
+  list-style: none;
+  padding: 0;
+  margin: 1rem auto;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.benefits li {
+  margin: 0.5rem 0;
+}
+
+.quote {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #eee;
+  text-align: center;
+}
+
+.footer-note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #ccc;
+  text-align: center;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <h2></h2>
+    <div class="language-selector">
+      <select onchange="switchLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+      </select>
+    </div>
+  </header>
+
+  <section class="landing">
+  <h1>Diabetes Diet Planner</h1>
+  <p class="intro-text">
+    Start your journey to balanced health with personalized South Indian meals, nutrition tracking, and daily tips tailored for diabetes care.
+  </p>
+
+  <ul class="benefits">
+    <li>✅ Choose culturally familiar meals</li>
+    <li>✅ Track your sugar levels and GI impact</li>
+    <li>✅ Get daily nutrition reports and smart reminders</li>
+  </ul>
+
+  <blockquote class="quote">
+    “Let food be thy medicine and medicine be thy food.” – Hippocrates
+  </blockquote>
+
+  <button class="start-btn" onclick="startPlanner()">Start Planning Your Diet</button>
+
+  <p class="footer-note">
+    Built for South Indian lifestyles. Designed for better health.
+  </p>
+</section>
+
+  <section class="main-content">
+    <div class="tabs">
+      <div class="tab" onclick="showTab('meal')">🥗 Meal Planner</div>
+      <div class="tab" onclick="showTab('gi')">📊 GI Tracker</div>
+      <div class="tab" onclick="showTab('nutrition')">🧮 Nutritional Info</div>
+      <div class="tab" onclick="showTab('report')">📋 Daily Report</div>
+      <div class="tab" onclick="showTab('tips')">🧘 Tips & Reminders</div>
+    </div>
+
+
+<div class="tab-content" id="nutrition">
+  <h3>Nutrition Info</h3>
+  <ul id="nutrition-list"></ul>
+</div>
+
+<div class="tab-content" id="meal">
+  <h3>Choose Your Meals</h3>
+ 
+  <div id="food-list">
+    <div class="food-card" data-meal="Vegetable Sambar">
+      <strong>Vegetable Sambar</strong><br />
+      Carbs: 18g | Protein: 6g | GI: 40
+      <button class="select-btn">Select</button>
+    </div>
+    <div class="food-card" data-meal="Brown Rice Pongal">
+      <strong>Brown Rice Pongal</strong><br />
+      Carbs: 32g | Protein: 5g | GI: 55
+      <button class="select-btn">Select</button>
+    </div>
+    <div class="food-card" data-meal="Oats Uttapam">
+      <strong>Oats Uttapam</strong><br />
+      Carbs: 22g | Protein: 7g | GI: 50
+      <button class="select-btn">Select</button>
+    </div>
+    <div class="food-card" data-meal="Millet Khichdi">
+      <strong>Millet Khichdi</strong><br />
+      Carbs: 20g | Protein: 6g | GI: 45
+      <button class="select-btn">Select</button>
+    </div>
+    <div class="food-card" data-meal="Vegetable Kurma">
+      <strong>Vegetable Kurma</strong><br />
+      Carbs: 12g | Protein: 2g | GI: 30
+      <button class="select-btn">Select</button>
+    </div>
+    <div class="food-card" data-meal="Moong Dal Sundal">
+      <strong>Moong Dal Sundal</strong><br />
+      Carbs: 15g | Protein: 9g | GI: 25
+      <button class="select-btn">Select</button>
+    </div>
+    <div class="food-card" data-meal="Avial">
+      <strong>Avial</strong><br />
+      Carbs: 10g | Protein: 2g | GI: 20
+      <button class="select-btn">Select</button>
+    </div>
+    <button class="start-btn" style="margin-top: 1rem;" onclick="applyMealSelection()">Apply Selection</button>
+  </div>
+</div>
+
+
+   <div class="tab-content" id="gi">
+  <h3>Enter Your Blood Sugar Levels</h3>
+  <label>Fasting (Normal: 80–130 mg/dL):</label><br />
+  <input type="number" /><br /><br />
+  <label>Post-meal (Normal: <180 mg/dL):</label><br />
+  <input type="number" /><br /><br />
+  <button onclick="showFeedback()">Submit</button>
+  <p id="feedback"></p>
+</div>
+
+
+
+    <div class="tab-content" id="report">
+      <h3>Daily Report</h3>
+      <div class="report-column">
+        <strong>Yesterday:</strong> 120 mg/dL<br />
+        <strong>Today:</strong> 135 mg/dL<br />
+        <strong>Change:</strong> +15 mg/dL
+      </div>
+    </div>
+<div class="tab-content" id="tips">
+  <h3>Tips & Reminders</h3>
+  <ul id="tips-list"></ul>
+</div>
+
+
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 South India Diabetes Planner
+  </footer>
+
+  <script>
+    function startPlanner() {
+      document.querySelector('.landing').style.display = 'none';
+      document.querySelector('.main-content').style.display = 'block';
+      showTab('meal');
+    }
+
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+function showFeedback() {
+  const fasting = parseInt(document.querySelectorAll('#gi input')[0].value);
+  const postMeal = parseInt(document.querySelectorAll('#gi input')[1].value);
+  let msg = '';
+  let tips = [];
+
+  if (isNaN(fasting) || isNaN(postMeal)) {
+    msg = 'Please enter valid numbers for both readings.';
+    tips = [
+      'Double-check your input values.',
+      'Use a reliable glucometer for accurate readings.',
+      'Consult your doctor if unsure about your levels.'
+    ];
+  } else if (fasting < 80 || postMeal < 70) {
+    msg = 'Your sugar is low. Add moderate carbs.';
+    tips = [
+      'Eat small, frequent meals to avoid dips in sugar.',
+      'Include healthy carbs like fruits, oats, or sweet potato.',
+      'Don’t skip breakfast — start with a balanced meal.',
+      'Keep a small snack handy, like roasted chana or a banana.'
+    ];
+  } else if (fasting > 130 || postMeal > 180) {
+    msg = 'High sugar detected. Switch to low-GI foods.';
+    tips = [
+      'Switch to low-GI foods like millets, legumes, and greens.',
+      'Avoid sugary drinks, white rice, and refined flour.',
+      'Walk for 20–30 minutes after meals to improve glucose control.',
+      'Stay hydrated — drink plenty of water throughout the day.'
+    ];
+  } else {
+    msg = 'Great job! Your sugar levels are stable. Keep it up!';
+    tips = [
+      'Maintain your current meal balance — it’s working!',
+      'Continue using fiber-rich foods like beans and vegetables.',
+      'Stay active with light movement after meals.',
+      'Keep stress low — mindfulness and sleep matter too.'
+    ];
+  }
+
+  document.getElementById('feedback').innerText = msg;
+  updateTips(tips);
+  updateDailyReport(postMeal);
+  showTab('tips'); // Optional: auto-switch to Tips tab
+}
+
+function updateTips(tipsArray) {
+  const tipsList = document.getElementById('tips-list');
+  tipsList.innerHTML = '';
+  tipsArray.forEach(tip => {
+    const item = document.createElement('li');
+    item.textContent = tip;
+    tipsList.appendChild(item);
+  });
+}
+
+function switchLanguage(lang) {
+      // Placeholder: You can integrate i18n libraries or JSON-based translations here
+      alert('Language switched to: ' + lang);
+    }
+ const foodData = {
+  "Vegetable Sambar": { carbs: 18, protein: 6, gi: 40 },
+  "Brown Rice Pongal": { carbs: 32, protein: 5, gi: 55 },
+  "Oats Uttapam": { carbs: 23, protein: 6, gi: 45 },
+  "Millet Khichdi": { carbs: 21, protein: 6, gi: 40 },
+  "Moong Dal Sundal": { carbs: 18, protein: 9, gi: 38 },
+  "Avial": { carbs: 10, protein: 2, gi: 20 }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Enable selection toggle
+  document.querySelectorAll('.select-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.food-card');
+      card.classList.toggle('selected');
+    });
+  });
+
+  // Show default tips on initial load
+  updateTips([
+    'Eat balanced meals with fiber and protein.',
+    'Avoid refined sugars and processed snacks.',
+    'Stay hydrated and walk after meals.',
+    'Monitor your sugar levels regularly.'
+  ]);
+});
+
+function applyMealSelection() {
+  const selectedFoods = Array.from(document.querySelectorAll('.food-card.selected'))
+    .map(card => card.dataset.meal);
+  updateNutritionTab(selectedFoods);
+  showTab('nutrition');
+}
+
+function updateNutritionTab(selectedFoods) {
+  const list = document.getElementById('nutrition-list');
+  list.innerHTML = '';
+  selectedFoods.forEach(food => {
+    const info = foodData[food];
+    const item = document.createElement('li');
+    item.textContent = `${food} – Carbs: ${info.carbs}g | Protein: ${info.protein}g | GI: ${info.gi}`;
+    list.appendChild(item);
+  });
+}
+let previousReading = 120; // Default value for "Yesterday"
+
+function updateDailyReport(todayReading) {
+  const change = todayReading - previousReading;
+  const reportColumn = document.querySelector('.report-column');
+  reportColumn.innerHTML = `
+    <strong>Yesterday:</strong> ${previousReading} mg/dL<br />
+    <strong>Today:</strong> ${todayReading} mg/dL<br />
+    <strong>Change:</strong> ${change >= 0 ? '+' : ''}${change} mg/dL
+  `;
+  previousReading = todayReading; // Update for next time
+}
+
+function updateTips(tipsArray) {
+  const tipsList = document.getElementById('tips-list');
+  tipsList.innerHTML = '';
+
+  // If no tips provided, show default fallback
+  if (!Array.isArray(tipsArray) || tipsArray.length === 0) {
+    tipsArray = [
+      'Eat balanced meals with fiber and protein.',
+      'Avoid refined sugars and processed snacks.',
+      'Stay hydrated and walk after meals.',
+      'Monitor your sugar levels regularly.'
+    ];
+  }
+
+  tipsArray.forEach(tip => {
+    const item = document.createElement('li');
+    item.textContent = tip;
+    tipsList.appendChild(item);
+  });
+}
+  </script>
+</body>
+</html>
